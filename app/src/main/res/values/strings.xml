@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestMovie</string>
+    <string name="et_search">Digite o nome do filme</string>
+    <string name="bt_search">Buscar</string>
+    <string name="api_key">49443b8a</string>
+    <string name="bt_save">Salvar</string>
+</resources>
