@@ -15,32 +15,33 @@ public class DBMovie {
 
     private static DBHelper dbHelper;
 
-    public static void dbInit(Context context){ dbHelper = new DBHelper(context);}
+    public static void dbInit(Context context) {
+        dbHelper = new DBHelper(context);
+    }
 
 
-    public static boolean isThereMovies() throws DBMovieException
-    {
-        if(dbHelper == null){
+    public static boolean isThereMovies() throws DBMovieException {
+        if (dbHelper == null) {
             throw new DBMovieException("DBMovie was not initialized");
         }
         SQLiteDatabase movieDB = dbHelper.getReadableDatabase();
-        String query = "SELECT COUNT(*) FROM "+DBTableFields.MovieTable.TABLE_NAME+";";
+        String query = "SELECT COUNT(*) FROM " + DBTableFields.MovieTable.TABLE_NAME + ";";
         Cursor cursor = movieDB.rawQuery(query, null);
         cursor.moveToFirst();
-        boolean test = (cursor.getInt(0)>0);
+        boolean test = (cursor.getInt(0) > 0);
         cursor.close();
         movieDB.close();
         return test;
     }
 
     public static void insertMovie(MovieDetailModel movie) throws DBMovieException {
-        if(dbHelper == null){
+        if (dbHelper == null) {
             throw new DBMovieException("DBMovie was not initialiazed!");
         }
 
         SQLiteDatabase movieDB = dbHelper.getWritableDatabase();
 
-        try{
+        try {
             movieDB.beginTransaction();
 
             // Movie para ContentValues
@@ -59,19 +60,20 @@ public class DBMovie {
             cv.put(DBTableFields.MovieTable.COL_IMDBID, movie.getImdbID());
 
             // INSERT INTO movie (...);
-            movieDB.insert(DBTableFields.MovieTable.TABLE_NAME,null, cv);
+            movieDB.insert(DBTableFields.MovieTable.TABLE_NAME, null, cv);
 
             movieDB.setTransactionSuccessful();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new DBMovieException("SQLError during insertion: " + e.getMessage());
         } finally {
             movieDB.endTransaction();
             movieDB.close();
         }
     }
+
     //Pega o Array de Movies
-    public static ArrayList<MovieDetailModel> getMovieInfo() throws DBMovieException{
-        if(dbHelper == null){
+    public static ArrayList<MovieDetailModel> getMovieInfo() throws DBMovieException {
+        if (dbHelper == null) {
             throw new DBMovieException("DBStalker was not initialiazed!");
         }
 
@@ -106,7 +108,7 @@ public class DBMovie {
                 null,
                 null);
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             long id = cursor.getLong(cursor.getColumnIndex(DBTableFields.MovieTable._ID));
             String title = cursor.getString(cursor.getColumnIndex(DBTableFields.MovieTable.COL_TITLE));
             String released = cursor.getString(cursor.getColumnIndex(DBTableFields.MovieTable.COL_RELEASED));

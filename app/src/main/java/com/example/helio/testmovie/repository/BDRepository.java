@@ -12,22 +12,22 @@ import java.util.ArrayList;
 
 public class BDRepository {
 
-    public void insertMovie(Context context, MovieDetailModel movie){
+    public void insertMovie(Context context, MovieDetailModel movie) {
         try {
             DBMovie.dbInit(context);
             DBMovie.insertMovie(movie);
-            Log.d("BD","Insert sucess");
+            Log.d("BD", "Insert sucess");
         } catch (DBMovieException e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<MovieDetailModel> getAllMovies(Context context){
+    public ArrayList<MovieDetailModel> getAllMovies(Context context) {
         ArrayList<MovieDetailModel> movies;
         try {
             DBMovie.dbInit(context);
-             movies = DBMovie.getMovieInfo();
-            Log.d("BD","Insert sucess");
+            movies = DBMovie.getMovieInfo();
+            Log.d("BD", "Insert sucess");
         } catch (DBMovieException e) {
             e.printStackTrace();
             movies = null;

@@ -19,12 +19,12 @@ public class MovieRepository {
     private MovieService service;
     private RetrofitConfig retrofit;
 
-    public void searchMovies(String title, String page, final Interator callbackService){
+    public void searchMovies(String title, String page, final Interator callbackService) {
 
         retrofit = new RetrofitConfig();
         service = retrofit.getMovieService();
 
-        Call<MovieResponse> call = service.searchMovies(title,"49443b8a", page);
+        Call<MovieResponse> call = service.searchMovies(title, "49443b8a", page);
         call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(retrofit2.Call<MovieResponse> call, Response<MovieResponse> response) {
@@ -40,12 +40,12 @@ public class MovieRepository {
     }
 
 
-    public void loadDetailMovie(String imdbId, final Interator callbackService){
+    public void loadDetailMovie(String imdbId, final Interator callbackService) {
 
         retrofit = new RetrofitConfig();
         service = retrofit.getMovieService();
 
-        Call<MovieDetailResponse> call = service.getDetailMovie(imdbId,"49443b8a");
+        Call<MovieDetailResponse> call = service.getDetailMovie(imdbId, "49443b8a");
         call.enqueue(new Callback<MovieDetailResponse>() {
             @Override
             public void onResponse(retrofit2.Call<MovieDetailResponse> call, Response<MovieDetailResponse> response) {
@@ -65,8 +65,7 @@ public class MovieRepository {
     }
 
 
-
-    public interface Interator{
+    public interface Interator {
         void updateMovies(ArrayList<MovieModel> movies);
 
         void updateFavoriteMovies(ArrayList<MovieDetailModel> movies);

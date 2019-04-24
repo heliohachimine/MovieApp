@@ -20,7 +20,7 @@ public class DBTableFields {
         public static final String COL_IMDBID = "p_imdb_id";
         public static final String COL_POSTER = "p_poster";
 
-        public static String createQuery(){
+        public static String createQuery() {
             return "CREATE TABLE " + TABLE_NAME + " (" +
                     _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COL_TITLE + " TEXT NOT NULL, " +

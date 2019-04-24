@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.MovieDetailViewHolder> {
 
-    private MainLineViewBinding binding;
     private MovieRepository.Interator interator;
 
     private ArrayList<MovieDetailModel> mMovies = new ArrayList<>();
@@ -26,7 +25,7 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
         this.interator = interator;
     }
 
-    public void  updateFavoriteMovies(ArrayList<MovieDetailModel> movies){
+    public void updateFavoriteMovies(ArrayList<MovieDetailModel> movies) {
         this.mMovies = movies;
         notifyDataSetChanged();
     }
@@ -34,8 +33,8 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
     @Override
     public MovieDetailViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         MovieDetailAdapter.MovieDetailViewHolder vh = null;
-        MainLineViewBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.main_line_view,parent, false);
-        vh = new MovieDetailAdapter.MovieDetailViewHolder(binding,interator);
+        MainLineViewBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.main_line_view, parent, false);
+        vh = new MovieDetailAdapter.MovieDetailViewHolder(binding, interator);
         return vh;
     }
 
@@ -60,10 +59,10 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
             this.interator = interator;
         }
 
-        public void bind(final MovieDetailModel movie){
-            if(!movie.getPoster().equals("N/A")){
+        public void bind(final MovieDetailModel movie) {
+            if (!movie.getPoster().equals("N/A")) {
                 Picasso.get().load(movie.getPoster()).into(binding.ivPoster);
-            }else{
+            } else {
                 binding.ivPoster.setImageResource(R.drawable.defaultthumbnail);
             }
 

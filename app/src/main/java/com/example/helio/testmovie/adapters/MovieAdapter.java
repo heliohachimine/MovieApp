@@ -1,12 +1,11 @@
 package com.example.helio.testmovie.adapters;
+
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.helio.testmovie.R;
 
@@ -32,10 +31,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             this.interator = interator;
         }
 
-        public void bind(final MovieModel movie){
-            if(!movie.getPoster().equals("N/A")){
+        public void bind(final MovieModel movie) {
+            if (!movie.getPoster().equals("N/A")) {
                 Picasso.get().load(movie.getPoster()).into(binding.ivPoster);
-            }else{
+            } else {
                 binding.ivPoster.setImageResource(R.drawable.defaultthumbnail);
             }
 
@@ -52,26 +51,23 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     }
 
-
     private ArrayList<MovieModel> mMovies = new ArrayList<>();
 
-    public MovieAdapter(MovieRepository.Interator interator){
+    public MovieAdapter(MovieRepository.Interator interator) {
         this.interator = interator;
     }
 
-   public void  updateMovies(ArrayList<MovieModel> movies){
+    public void updateMovies(ArrayList<MovieModel> movies) {
 
-       this.mMovies = movies;
-       notifyDataSetChanged();
+        this.mMovies = movies;
+        notifyDataSetChanged();
     }
-
-
 
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         MovieViewHolder vh = null;
-        MainLineViewBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.main_line_view,parent, false);
+        MainLineViewBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.main_line_view, parent, false);
         vh = new MovieViewHolder(binding, interator);
         return vh;
 

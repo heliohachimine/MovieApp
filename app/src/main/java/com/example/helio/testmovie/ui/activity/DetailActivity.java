@@ -4,18 +4,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.helio.testmovie.R;
 import com.example.helio.testmovie.data.DBHelper;
-import com.example.helio.testmovie.data.DBMovie;
-import com.example.helio.testmovie.data.DBMovieException;
 import com.example.helio.testmovie.databinding.ActivityDetailBinding;
 import com.example.helio.testmovie.repository.MovieRepository;
 import com.example.helio.testmovie.ui.model.MovieDetailModel;
 import com.example.helio.testmovie.ui.model.MovieModel;
 import com.example.helio.testmovie.viewmodel.DetailViewModel;
-import com.example.helio.testmovie.viewmodel.MainViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
