@@ -1,7 +1,10 @@
 package com.example.helio.testmovie.viewmodel;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.helio.testmovie.repository.BDRepository;
 import com.example.helio.testmovie.repository.MovieRepository;
@@ -26,14 +29,11 @@ public class MainViewModel {
         this.context = context;
     }
 
-    public void clickAddMovie(){
-        Log.i("teste", "clicou o botao");
-        if(!movie.getTitle().isEmpty() && (movie != null)){
-            repository.searchMovies(movie.getTitle(), "1", interator);
+    public LiveData<Boolean> clickAddMovie() {
+        LiveData<Boolean> isLoading = repository.searchMovies(movie.getTitle(), "1", interator);
+        return isLoading;
 
-        }
     }
-
 
 
 }

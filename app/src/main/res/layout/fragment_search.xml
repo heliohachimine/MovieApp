@@ -17,8 +17,10 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/rl_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <EditText
                 android:id="@+id/et_search"
@@ -26,31 +28,27 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/et_search"
                 android:text="@={vm.movie.title}"
-                android:layout_margin="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
                 app:layout_constraintEnd_toStartOf="@id/bt_add_movie"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/bt_add_movie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/et_search"
-                android:onClick="@{() -> vm.clickAddMovie()}"
-                android:text="@string/bt_search"
                 android:layout_margin="@dimen/default_margin"
+                android:src="@drawable/ic_baseline_search_24px"
                 app:layout_constraintStart_toEndOf="@id/et_search"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:id="@+id/linearlayout"
-                android:layout_height="fill_parent"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:orientation="vertical" >
-            </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent">
+            </ImageButton>
 
 
         </android.support.constraint.ConstraintLayout>
@@ -65,5 +63,32 @@
             tools:layout_editor_absoluteX="0dp"
             tools:listitem="@layout/main_line_view"
             tools:ignore="MissingConstraints" />
+        <FrameLayout
+            android:id="@+id/loading_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="invisible"
+            android:background="@color/whiteTransparency">
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:lottie_rawRes="@raw/loading"
+                    app:lottie_loop="true"
+                    app:lottie_autoPlay="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            </android.support.constraint.ConstraintLayout>
+
+        </FrameLayout>
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -1,5 +1,6 @@
 package com.example.helio.testmovie.viewmodel;
 
+import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.util.Log;
@@ -36,9 +37,9 @@ public class DetailViewModel {
     ){ this.interator = interator;
     this.context = context;}
 
-    public void loadMovie(String imdbId){
-
-        repository.loadDetailMovie(imdbId, interator);
+    public LiveData<Boolean> loadMovie(String imdbId){
+        LiveData<Boolean> isLoading = repository.loadDetailMovie(imdbId, interator);
+        return isLoading;
     }
 
     public void setMovie(MovieDetailModel movie){

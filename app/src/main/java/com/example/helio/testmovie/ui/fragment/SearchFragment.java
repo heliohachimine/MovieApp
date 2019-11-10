@@ -1,5 +1,7 @@
 package com.example.helio.testmovie.ui.fragment;
 
+import android.app.Activity;
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.example.helio.testmovie.adapters.MovieAdapter;
 import com.example.helio.testmovie.databinding.FragmentSearchBinding;
@@ -39,6 +42,24 @@ public class SearchFragment extends Fragment implements MovieRepository.Interato
         binding = FragmentSearchBinding.inflate(inflater, container,false);
         binding.setVm(viewModel);
         setupRecycler();
+        binding.btAddMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyboard(getActivity());
+                if(binding.etSearch != null ) {
+                    viewModel.clickAddMovie().observe(getActivity(), new Observer<Boolean>() {
+                        @Override
+                        public void onChanged(@Nullable Boolean aBoolean) {
+                            if (aBoolean) {
+                                binding.loadingLayout.setVisibility(View.VISIBLE);
+                            } else {
+                                binding.loadingLayout.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    });
+                }
+            }
+        });
 
         binding.executePendingBindings();
 
@@ -82,6 +103,17 @@ public class SearchFragment extends Fragment implements MovieRepository.Interato
     @Override
     public void onErrorResult() {
 
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 

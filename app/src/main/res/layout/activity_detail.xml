@@ -9,10 +9,12 @@
             name="vm"
             type="com.example.helio.testmovie.viewmodel.DetailViewModel" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -23,9 +25,11 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
+
 
                 <TextView
                     android:id="@+id/tv_title"
@@ -52,8 +56,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Salvar"
                     android:onClick="@{() -> vm.clickSave()}"
+                    android:text="Salvar"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -66,36 +70,67 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
-            <LinearLayout
+
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
 
+                <FrameLayout
+                    android:id="@+id/loading_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/whiteTransparency"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/animation_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/loading" />
+                    </android.support.constraint.ConstraintLayout>
+
+                </FrameLayout>
+
 
                 <ImageView
                     android:id="@+id/iv_poster"
-                    android:layout_width="150dp"
-                    android:layout_height="190dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="@dimen/default_margin"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/defaultthumbnail"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/defaultthumbnail"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                     />
+
                 <TextView
                     android:id="@+id/tv_data_lancamento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/toolbar"
-                    android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginLeft="@dimen/default_margin"
-                    android:layout_toRightOf="@id/iv_poster"
+                    android:text="Data de Lançamento"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:text="Data de Lançamento" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_poster" />
+
 
                 <TextView
                     android:id="@+id/tv_released"
@@ -104,18 +139,24 @@
                     android:layout_below="@id/tv_data_lancamento"
                     android:layout_marginLeft="@dimen/default_margin"
                     android:layout_toRightOf="@id/iv_poster"
-                    android:text="@{vm.released}" />
+                    android:text="@{vm.released}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_data_lancamento"
+                     />
                 <TextView
                     android:id="@+id/tv_duracao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_released"
-                    android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/default_margin"
                     android:layout_toRightOf="@id/iv_poster"
+                    android:text="Duração"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:text="Duração" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_released" />
 
                 <TextView
                     android:id="@+id/tv_runtime"
@@ -124,18 +165,26 @@
                     android:layout_below="@id/tv_duracao"
                     android:layout_marginLeft="@dimen/default_margin"
                     android:layout_toRightOf="@id/iv_poster"
-                    android:text="@{vm.runtime}" />
+                    android:text="@{vm.runtime}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_duracao" />
+
                 <TextView
                     android:id="@+id/tv_genero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_runtime"
-                    android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/default_margin"
                     android:layout_toRightOf="@id/iv_poster"
+                    android:text="Gênero"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:text="Gênero" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_runtime" />
+
                 <TextView
                     android:id="@+id/tv_genre"
                     android:layout_width="match_parent"
@@ -143,115 +192,139 @@
                     android:layout_below="@id/tv_genero"
                     android:layout_marginLeft="@dimen/default_margin"
                     android:layout_toRightOf="@id/iv_poster"
-                    android:text="@{vm.genre}" />
+                    android:text="@{vm.genre}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_genero" />
 
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
                 <TextView
                     android:id="@+id/tv_diretor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:text="Diretor"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:text="Diretor" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_genre" />
+
                 <TextView
                     android:id="@+id/tv_director"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_margin"
-                    android:text="@{vm.director}" />
+                    android:text="@{vm.director}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_diretor" />
 
                 <TextView
                     android:id="@+id/tv_escritor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:text="Escritor"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:text="Escritor" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_director" />
 
                 <TextView
                     android:id="@+id/tv_writer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_margin"
-                    android:text="@{vm.writer}" />
+                    android:text="@{vm.writer}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_escritor" />
 
                 <TextView
                     android:id="@+id/tv_atores"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:text="Atores"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:text="Atores" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_writer" />
+
                 <TextView
                     android:id="@+id/tv_actors"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_margin"
-                    android:text="@{vm.actors}" />
+                    android:text="@{vm.actors}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_atores" />
 
                 <TextView
                     android:id="@+id/tv_enredo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_margin"
                     android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:text="Enredo"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:text="Enredo" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_actors" />
+
                 <TextView
                     android:id="@+id/tv_plot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_margin"
-                    android:text="@{vm.plot}" />
+                    android:text="@{vm.plot}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_enredo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
 
-                <TextView
-                    android:id="@+id/tv_pais"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:layout_marginLeft="@dimen/default_margin"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:text="Origem" />
-                <TextView
-                    android:id="@+id/tv_country"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/default_margin"
-                    android:text="@{vm.country}" />
+                <!--<TextView-->
+                <!--android:id="@+id/tv_pais"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/default_margin"-->
+                <!--android:layout_marginLeft="@dimen/default_margin"-->
+                <!--android:textSize="15sp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:text="Origem" />-->
+                <!--<TextView-->
+                <!--android:id="@+id/tv_country"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/default_margin"-->
+                <!--android:text="@{vm.country}" />-->
 
-                <TextView
-                    android:id="@+id/tv_avaliacao"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:layout_marginLeft="@dimen/default_margin"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:text="Avaliação IMDB" />
-                <TextView
-                    android:id="@+id/tv_imdb_rating"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/default_margin"
-                    android:text="@{vm.imdbRating}" />
+                <!--<TextView-->
+                <!--android:id="@+id/tv_avaliacao"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/default_margin"-->
+                <!--android:layout_marginLeft="@dimen/default_margin"-->
+                <!--android:textSize="15sp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:text="Avaliação IMDB" />-->
+                <!--<TextView-->
+                <!--android:id="@+id/tv_imdb_rating"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/default_margin"-->
+                <!--android:text="@{vm.imdbRating}" />-->
 
-            </LinearLayout>
-            </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
         </ScrollView>
+
     </LinearLayout>
 
 </layout>
