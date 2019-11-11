@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 
 import com.example.helio.testmovie.R;
 
+import com.example.helio.testmovie.databinding.AdapterMovieBinding;
 import com.example.helio.testmovie.databinding.MainLineViewBinding;
 import com.example.helio.testmovie.repository.MovieRepository;
 import com.example.helio.testmovie.ui.model.MovieModel;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 
@@ -22,10 +24,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     private MovieRepository.Interator interator;
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
-        private MainLineViewBinding binding;
+        private AdapterMovieBinding binding;
         private MovieRepository.Interator interator;
 
-        public MovieViewHolder(MainLineViewBinding binding, MovieRepository.Interator interator) {
+        public MovieViewHolder(AdapterMovieBinding binding, MovieRepository.Interator interator) {
             super(binding.getRoot());
             this.binding = binding;
             this.interator = interator;
@@ -33,9 +35,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         public void bind(final MovieModel movie) {
             if (!movie.getPoster().equals("N/A")) {
-                Picasso.get().load(movie.getPoster()).into(binding.ivPoster);
+
+                Picasso.get().load(movie.getPoster()).into(binding.ivMovie);
             } else {
-                binding.ivPoster.setImageResource(R.drawable.defaultthumbnail);
+                binding.ivMovie.setImageResource(R.drawable.defaultthumbnail);
             }
 
             binding.tvTitle.setText(movie.getTitle());
@@ -67,7 +70,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         MovieViewHolder vh = null;
-        MainLineViewBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.main_line_view, parent, false);
+        AdapterMovieBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.adapter_movie, parent, false);
         vh = new MovieViewHolder(binding, interator);
         return vh;
 

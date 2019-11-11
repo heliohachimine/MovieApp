@@ -68,7 +68,7 @@ public class SearchFragment extends Fragment implements MovieRepository.Interato
     }
 
     private void setupRecycler(){
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL, false);
         binding.rvMovies.setLayoutManager(layoutManager);
         binding.rvMovies.setHasFixedSize(true);
         binding.rvMovies.setAdapter(mAdapter);
